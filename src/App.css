@@ -1,0 +1,108 @@
+/* 전체 날씨 카드 */
+.weather-display {
+  text-align: center;
+  padding: 24px;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.795);
+  max-width: 400px;
+  margin: 0 auto;
+  transition: opacity 0.5s ease;
+  margin-top: 50px;
+  position: relative;
+}
+
+/* 날씨 아이콘 */
+.weather-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  transition: transform 0.5s ease;
+}
+.weather-icon:hover {
+  transform: scale(1.05);
+}
+
+/* 도시 이름 */
+.city-name {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* 지역 시간 */
+.local-time {
+  font-size: 14px;
+  color: #d1d5db;
+  margin-bottom: 10px;
+}
+
+/* 메인 온도 */
+.temperature {
+  font-size: 48px;
+  color: #ffffff; /* 파란 계열 */
+  margin-bottom: 16px;
+  font-weight: 300;
+  margin-top: 15px;
+}
+
+/* 날씨 설명 */
+.weather-condition {
+  font-size: 18px;
+  color: #d1d5db;
+  margin-bottom: 24px;
+}
+
+/* 섭씨/화씨 표 */
+.unit-breakdown {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  border-top: 1px solid #374151;
+  padding-top: 16px;
+}
+
+.unit-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.unit-label {
+  font-size: 12px;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.unit-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+
+/*섭씨 화씨 변환 토글*/
+.unit-toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.unit-option {
+  border: none;
+  background: transparent;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.unit-option.active {
+  background-color: #59b55b;
+  color: white;
+}
