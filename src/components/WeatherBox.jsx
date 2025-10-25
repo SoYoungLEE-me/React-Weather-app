@@ -2,7 +2,13 @@ import React from "react";
 import { useState } from "react";
 import WeatherButton from "./WeatherButton";
 
-const WeatherBox = ({ weather, cities, onCityChange, onCurrentLocation }) => {
+const WeatherBox = ({
+  weather,
+  cities,
+  onCityChange,
+  onCurrentLocation,
+  activeCity,
+}) => {
   const [unit, setUnit] = useState("C");
 
   const handleUnitChange = (selectedUnit) => {
@@ -136,6 +142,7 @@ const WeatherBox = ({ weather, cities, onCityChange, onCurrentLocation }) => {
         cities={cities}
         onCityChange={onCityChange}
         onCurrentLocation={onCurrentLocation}
+        activeCity={activeCity}
       />
     </div>
   );

@@ -12,10 +12,12 @@ import "./App.css";
 function App() {
   const [weather, setWeather] = useState(null);
   let [loading, setLoading] = useState(true);
+  const [activeCity, setActiveCity] = useState("current");
 
   const cities = ["paris", "new york", "tokyo", "seoul", "Busan"];
 
   const getCurrentLocation = () => {
+    setActiveCity("current");
     navigator.geolocation.getCurrentPosition(async (position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
@@ -27,6 +29,7 @@ function App() {
   };
 
   const handleCitySearch = async (cityName) => {
+    setActiveCity(cityName);
     setLoading(true);
     const data = await citiesWeather(cityName);
     setWeather(data);
@@ -50,6 +53,7 @@ function App() {
             cities={cities}
             onCityChange={handleCitySearch}
             onCurrentLocation={getCurrentLocation}
+            activeCity={activeCity}
           />
         )
       )}
