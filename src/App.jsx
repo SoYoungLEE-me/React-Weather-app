@@ -14,7 +14,7 @@ function App() {
   let [loading, setLoading] = useState(true);
   const [activeCity, setActiveCity] = useState("current");
 
-  const cities = ["paris", "new york", "tokyo", "seoul", "Busan"];
+  const cities = ["paris", "new york", "tokyo", "seoul", "busan"];
 
   const getCurrentLocation = () => {
     setActiveCity("current");

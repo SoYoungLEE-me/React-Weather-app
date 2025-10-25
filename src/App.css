@@ -2,7 +2,6 @@
 .weather-display {
   text-align: center;
   padding: 24px;
-  color: #ffffff;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.795);
   max-width: 400px;
@@ -26,6 +25,7 @@
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 8px;
+  color: #3d3d3d;
 }
 
 /* 지역 시간 */
