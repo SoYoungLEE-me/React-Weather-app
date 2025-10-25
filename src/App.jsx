@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { getCurrentWeather } from "./api/weather";
-import WeatherBox from "./components/WeatherBox.jsx";
+import { citiesWeather, getCurrentWeather } from "./api/weather";
+import WeatherBox from "./components/WeatherBox";
+import { ClipLoader } from "react-spinners";
 import "./App.css";
 
 //1. 앱이 실행되자마자 현재위치기반의 날씨가 보인다.
@@ -10,6 +11,9 @@ import "./App.css";
 //5. 현재위치 버튼을 누르면 다시 현재위치 기반의 날씨가 나온다.
 function App() {
   const [weather, setWeather] = useState(null);
+  let [loading, setLoading] = useState(true);
+
+  const cities = ["paris", "new york", "tokyo", "seoul", "Busan"];
 
   const getCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(async (position) => {
@@ -18,7 +22,15 @@ function App() {
 
       const data = await getCurrentWeather(lat, lon);
       setWeather(data);
+      setLoading(false);
     });
+  };
+
+  const handleCitySearch = async (cityName) => {
+    setLoading(true);
+    const data = await citiesWeather(cityName);
+    setWeather(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -26,8 +38,21 @@ function App() {
   }, []);
 
   return (
-    <div>
-      {weather ? <WeatherBox weather={weather} /> : <p>날씨 불러오는 중...</p>}
+    <div className="app-container">
+      {loading ? (
+        <div className="loading-overlay">
+          <ClipLoader />
+        </div>
+      ) : (
+        weather && (
+          <WeatherBox
+            weather={weather}
+            cities={cities}
+            onCityChange={handleCitySearch}
+            onCurrentLocation={getCurrentLocation}
+          />
+        )
+      )}
     </div>
   );
 }

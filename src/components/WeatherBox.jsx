@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import WeatherButton from "./WeatherButton";
 
-const WeatherBox = ({ weather }) => {
+const WeatherBox = ({ weather, cities, onCityChange, onCurrentLocation }) => {
   const [unit, setUnit] = useState("C");
 
   const handleUnitChange = (selectedUnit) => {
@@ -55,15 +56,16 @@ const WeatherBox = ({ weather }) => {
     Mist: "🌫️",
   };
 
+  // 날씨별 배경 색 변화
   const bgColorMap = {
-    Clear: "linear-gradient(135deg, #FF9944, #FF5B79)",
-    Clouds: "linear-gradient(135deg, #607D8B, #455A64)",
-    Rain: "linear-gradient(135deg, #304FFE, #1976D2)",
-    Snow: "linear-gradient(135deg, #AEEEEE, #6DD5FA)",
-    Thunderstorm: "linear-gradient(135deg, #1C1C1C, #000000)",
-    Drizzle: "linear-gradient(135deg, #81C784, #4CAF50)",
-    Mist: "linear-gradient(135deg, #757F9A, #D7DDE8)",
-    Default: "linear-gradient(135deg, #A200FF, #00C8FF)",
+    Clear: "linear-gradient(135deg, #FFDD99, #FFABBB)",
+    Clouds: "linear-gradient(135deg, #9BA9B4, #7C8A96)",
+    Rain: "linear-gradient(135deg, #A5C8E1, #7FB3D5)",
+    Snow: "linear-gradient(135deg, #E3F7FF, #CFE7FF)",
+    Thunderstorm: "linear-gradient(135deg, #9FA8B2, #6D757E)",
+    Drizzle: "linear-gradient(135deg, #C8E6C9, #A5D6A7)",
+    Mist: "linear-gradient(135deg, #AEB7C0, #949DA7)",
+    Default: "linear-gradient(135deg, #D4BBFF, #99E1FF)",
   };
 
   const bgColor = bgColorMap[icon] || bgColorMap["Default"];
@@ -90,16 +92,15 @@ const WeatherBox = ({ weather }) => {
           °F
         </button>
       </div>
+      {/* 도시 이름 */}
+      <h2 id="city-name" className="city-name">
+        {weather.name}
+      </h2>
 
       {/* 날씨 아이콘 */}
       <div id="weather-icon" className="weather-icon">
         {iconMap[icon] || "🌈"}
       </div>
-
-      {/* 도시 이름 */}
-      <h2 id="city-name" className="city-name">
-        {weather.name}
-      </h2>
 
       {/* 지역 시간 (향후 구현 예정) */}
       <p id="local-time" className="local-time">
@@ -131,6 +132,11 @@ const WeatherBox = ({ weather }) => {
           </span>
         </div>
       </div>
+      <WeatherButton
+        cities={cities}
+        onCityChange={onCityChange}
+        onCurrentLocation={onCurrentLocation}
+      />
     </div>
   );
 };

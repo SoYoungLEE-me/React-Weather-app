@@ -2,7 +2,7 @@
 .weather-display {
   text-align: center;
   padding: 24px;
-  color: white;
+  color: #ffffff;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.795);
   max-width: 400px;
@@ -14,8 +14,7 @@
 
 /* 날씨 아이콘 */
 .weather-icon {
-  font-size: 64px;
-  margin-bottom: 16px;
+  font-size: 100px;
   transition: transform 0.5s ease;
 }
 .weather-icon:hover {
@@ -32,8 +31,9 @@
 /* 지역 시간 */
 .local-time {
   font-size: 14px;
-  color: #d1d5db;
+  color: #ffffff;
   margin-bottom: 10px;
+  font-weight: 400;
 }
 
 /* 메인 온도 */
@@ -41,18 +41,18 @@
   font-size: 48px;
   color: #ffffff; /* 파란 계열 */
   margin-bottom: 16px;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 15px;
 }
 
 /* 날씨 설명 */
 .weather-condition {
   font-size: 18px;
-  color: #d1d5db;
+  color: #ffffff;
   margin-bottom: 24px;
 }
 
-/* 섭씨/화씨 표 */
+/* 일몰 일출 표시*/
 .unit-breakdown {
   display: flex;
   justify-content: center;
@@ -69,14 +69,14 @@
 
 .unit-label {
   font-size: 12px;
-  color: #9ca3af;
+  color: #3d3d3d;
   margin-bottom: 4px;
 }
 
 .unit-value {
   font-size: 16px;
   font-weight: bold;
-  color: white;
+  color: rgb(75, 74, 74);
 }
 
 /*섭씨 화씨 변환 토글*/
@@ -105,4 +105,100 @@
 .unit-option.active {
   background-color: #59b55b;
   color: white;
+}
+
+/*도시 선택 버튼*/
+.city-container {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #374151;
+}
+
+.city-title {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  color: #535353;
+  font-weight: 600;
+}
+
+.city-buttons {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  padding-top: 1rem;
+}
+
+/* 스크롤바 */
+.city-buttons {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  padding-bottom: 0.5rem;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* ✔ iOS 관성 스크롤 */
+}
+
+.city-buttons::-webkit-scrollbar {
+  height: 6px;
+}
+.city-buttons::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+.city-buttons::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.15);
+}
+.city-buttons::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/*버튼 스타일 */
+.city-btn {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: 0.875rem;
+  padding: 0.5rem 1.2rem;
+  font-weight: 700;
+  color: #ffff;
+  background: #6d726a;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  margin-bottom: 1rem;
+}
+
+.city-btn:hover {
+  transform: translateY(-2px);
+}
+
+.city-btn.active {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.7);
+  transform: translateY(-3px);
+}
+
+/*로딩 스피너 css*/
+.app-container {
+  position: relative;
+}
+
+.loading-overlay {
+  position: fixed; /* ✅ 화면 전체를 기준으로 중앙정렬 */
+  top: 0;
+  left: 0;
+  width: 100vw; /* 화면 전체 */
+  height: 100vh; /* 화면 전체 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+  color: #2563eb;
 }

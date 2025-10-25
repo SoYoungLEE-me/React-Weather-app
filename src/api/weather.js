@@ -23,3 +23,8 @@ const fetchWeather = async (params) => {
 export const getCurrentWeather = async (lat, lon) => {
   return await fetchWeather({ lat, lon });
 };
+
+// 도시 기반 날씨
+export const citiesWeather = async (cityName) => {
+  return await fetchWeather({ q: cityName });
+};
