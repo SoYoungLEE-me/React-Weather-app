@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { citiesWeather, getCurrentWeather } from "./api/weather";
 import WeatherBox from "./components/WeatherBox";
+import LocationErrorModal from "./components/LocationErrorModal";
 import { ClipLoader } from "react-spinners";
 import "./App.css";
 
@@ -13,19 +14,31 @@ function App() {
   const [weather, setWeather] = useState(null);
   let [loading, setLoading] = useState(true);
   const [activeCity, setActiveCity] = useState("current");
+  const [locationError, setLocationError] = useState(false);
 
   const cities = ["paris", "new york", "tokyo", "seoul", "busan"];
 
   const getCurrentLocation = () => {
     setActiveCity("current");
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
 
-      const data = await getCurrentWeather(lat, lon);
-      setWeather(data);
-      setLoading(false);
-    });
+        const data = await getCurrentWeather(lat, lon);
+        setWeather(data);
+        setActiveCity("current");
+        setLoading(false);
+      },
+      async (error) => {
+        console.error("위치 접근 거부됨:", error);
+        const fallbackData = await citiesWeather("seoul");
+        setWeather(fallbackData);
+        setActiveCity("seoul");
+        setLocationError(true);
+        setLoading(false);
+      }
+    );
   };
 
   const handleCitySearch = async (cityName) => {
@@ -56,6 +69,9 @@ function App() {
             activeCity={activeCity}
           />
         )
+      )}
+      {locationError && (
+        <LocationErrorModal onClose={() => setLocationError(false)} />
       )}
     </div>
   );
