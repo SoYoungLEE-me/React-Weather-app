@@ -35,7 +35,13 @@ function App() {
           setLoading(false);
         },
         async (error) => {
-          console.error("위치 접근 거부됨:", error);
+          if (error.code === 1) {
+            console.error("위치 접근 거부됨:", error);
+            setLocationError(true);
+          } else if (error.code === 2) {
+            alert("현재 위치를 찾을 수 없습니다. 잠시 후 다시 시도해주세요.");
+          }
+
           const fallbackData = await citiesWeather("seoul");
           setWeather(fallbackData);
           setActiveCity("seoul");
@@ -44,7 +50,6 @@ function App() {
         },
         {
           enableHighAccuracy: false, //빠른 위치 (GPS보다 Wi-Fi 우선)
-          timeout: 8000, //8초 이상 걸리면 실패 처리
           maximumAge: 60000, // 1분 이내 위치 캐시 사용 (빠르게)
         }
       );
