@@ -20,25 +20,35 @@ function App() {
 
   const getCurrentLocation = () => {
     setActiveCity("current");
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
+    setWeather(null);
+    setLoading(true);
+    // React가 로딩 스피너를 먼저 렌더링하도록 살짝 지연
+    setTimeout(() => {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
 
-        const data = await getCurrentWeather(lat, lon);
-        setWeather(data);
-        setActiveCity("current");
-        setLoading(false);
-      },
-      async (error) => {
-        console.error("위치 접근 거부됨:", error);
-        const fallbackData = await citiesWeather("seoul");
-        setWeather(fallbackData);
-        setActiveCity("seoul");
-        setLocationError(true);
-        setLoading(false);
-      }
-    );
+          const data = await getCurrentWeather(lat, lon);
+          setWeather(data);
+          setActiveCity("current");
+          setLoading(false);
+        },
+        async (error) => {
+          console.error("위치 접근 거부됨:", error);
+          const fallbackData = await citiesWeather("seoul");
+          setWeather(fallbackData);
+          setActiveCity("seoul");
+          setLocationError(true);
+          setLoading(false);
+        },
+        {
+          enableHighAccuracy: false, //빠른 위치 (GPS보다 Wi-Fi 우선)
+          timeout: 8000, //8초 이상 걸리면 실패 처리
+          maximumAge: 60000, // 1분 이내 위치 캐시 사용 (빠르게)
+        }
+      );
+    }, 0);
   };
 
   const handleCitySearch = async (cityName) => {
