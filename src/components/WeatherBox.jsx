@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import WeatherButton from "./WeatherButton";
+import SearchBar from "./SearchBar";
 
 const WeatherBox = ({
   weather,
@@ -83,6 +84,7 @@ const WeatherBox = ({
         background: bgColor,
       }}
     >
+      <SearchBar />
       {/* 섭씨 화씨 변환 토글 */}
       <div className="unit-toggle">
         <button

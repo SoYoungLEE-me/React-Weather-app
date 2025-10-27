@@ -1,3 +1,8 @@
+.app-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 /* 전체 날씨 카드 */
 .weather-display {
   text-align: center;
@@ -5,10 +10,9 @@
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.795);
   max-width: 400px;
-  margin: 0 auto;
   transition: opacity 0.5s ease;
-  margin-top: 50px;
   position: relative;
+  margin: 0 auto;
 }
 
 /* 날씨 아이콘 */
@@ -26,6 +30,7 @@
   font-weight: bold;
   margin-bottom: 8px;
   color: #3d3d3d;
+  margin-top: 50px;
 }
 
 /* 지역 시간 */
@@ -49,7 +54,7 @@
 .weather-condition {
   font-size: 18px;
   color: #ffffff;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 /* 일몰 일출 표시*/
@@ -82,8 +87,8 @@
 /*섭씨 화씨 변환 토글*/
 .unit-toggle {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 90px;
+  right: 25px;
   display: flex;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 20px;
@@ -114,13 +119,30 @@
   border-top: 1px solid #374151;
 }
 
-.city-title {
+.cityBtn-top-region {
   display: flex;
   justify-content: space-between;
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.city-title {
+  font-size: 1.2em;
   color: #535353;
   font-weight: 600;
+}
+
+.add-city-btn {
+  font-size: 1rem;
+  color: #535353;
+  font-weight: 600;
+  cursor: pointer;
+  transform: translate(-17px, 12px);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.add-city-btn:hover {
+  text-shadow: 0 0 2px #fff, 0 0 6px #fff, 0 0 12px rgba(255, 255, 255, 0.95),
+    0 0 18px rgba(255, 255, 255, 0.85), 0 0 28px rgba(255, 255, 255, 0.75);
 }
 
 .city-buttons {
@@ -186,6 +208,34 @@
   transform: translateY(-3px);
 }
 
+/*삭제 버튼*/
+.city-btn-wrapper {
+  position: relative;
+}
+
+.remove-btn {
+  position: absolute;
+  top: -9px;
+  right: -10px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.city-btn-wrapper:hover .remove-btn {
+  opacity: 1;
+}
+
 /*로딩 스피너 css*/
 .app-container {
   position: relative;
@@ -249,4 +299,39 @@
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
+}
+
+/*검색 창*/
+.search-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 4rem;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: #374151;
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-size: 0.95rem;
+  outline: none;
+}
+.search-bar input::placeholder {
+  color: #9ca3af;
+}
+
+.search-bar button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.search-bar button:hover {
+  background: #1d4ed8;
 }

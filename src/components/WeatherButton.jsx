@@ -8,7 +8,11 @@ const WeatherButton = ({
 }) => {
   return (
     <div className="city-container">
-      <h3 className="city-title">즐겨찾기 한 도시</h3>
+      <div className="cityBtn-top-region">
+        <h3 className="city-title">즐겨찾기 한 도시</h3>
+        <h3 className="add-city-btn">+ 도시추가</h3>
+      </div>
+
       <div className="city-buttons">
         <button
           className={`city-btn ${activeCity === "current" ? "active" : ""}`}
@@ -18,17 +22,23 @@ const WeatherButton = ({
         >
           현재 위치
         </button>
+
         {cities.map((city) => (
-          <button
-            className={`city-btn ${
-              activeCity?.toLowerCase().trim() === city.toLowerCase().trim()
-                ? "active"
-                : ""
-            }`}
-            onClick={() => onCityChange(city)}
-          >
-            {city}
-          </button>
+          <div className="city-btn-wrapper">
+            <button
+              className={`city-btn ${
+                activeCity?.toLowerCase().trim() === city.toLowerCase().trim()
+                  ? "active"
+                  : ""
+              }`}
+              onClick={() => onCityChange(city)}
+            >
+              {city}
+            </button>
+            <button class="remove-btn" onClick={() => console.log("삭제")}>
+              ×
+            </button>
+          </div>
         ))}
       </div>
     </div>
