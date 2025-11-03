@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const WeatherButton = ({
   cities,
@@ -6,6 +6,25 @@ const WeatherButton = ({
   onCurrentLocation,
   activeCity,
 }) => {
+  useEffect(() => {
+    // 모바일 환경에서만 실행
+    if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
+      const wrappers = document.querySelectorAll(".city-btn-wrapper");
+
+      const handleClick = (wrapper) => {
+        wrapper.classList.toggle("show-remove");
+      };
+
+      wrappers.forEach((wrapper) => {
+        const listener = () => handleClick(wrapper);
+        wrapper.addEventListener("click", listener);
+
+        // cleanup (React unmount 시)
+        return () => wrapper.removeEventListener("click", listener);
+      });
+    }
+  }, []);
+
   return (
     <div className="city-container">
       <div className="cityBtn-top-region">
@@ -16,15 +35,13 @@ const WeatherButton = ({
       <div className="city-buttons">
         <button
           className={`city-btn ${activeCity === "current" ? "active" : ""}`}
-          onClick={() => {
-            onCurrentLocation();
-          }}
+          onClick={onCurrentLocation}
         >
           현재 위치
         </button>
 
         {cities.map((city) => (
-          <div className="city-btn-wrapper">
+          <div key={city} className="city-btn-wrapper">
             <button
               className={`city-btn ${
                 activeCity?.toLowerCase().trim() === city.toLowerCase().trim()
@@ -35,7 +52,7 @@ const WeatherButton = ({
             >
               {city}
             </button>
-            <button class="remove-btn" onClick={() => console.log("삭제")}>
+            <button className="remove-btn" onClick={() => console.log("삭제")}>
               ×
             </button>
           </div>

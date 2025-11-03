@@ -232,16 +232,16 @@
   justify-content: center;
 }
 
-/* PC 전용 hover 효과 */
+/* PC 전용 hover */
 @media (hover: hover) and (pointer: fine) {
   .city-btn-wrapper:hover .remove-btn {
     opacity: 1;
   }
 }
 
-/* 모바일 전용: 터치 시 fade-in */
+/* 모바일 전용 터치 시 fade-in */
 @media (hover: none) and (pointer: coarse) {
-  .remove-btn {
+  .city-btn-wrapper.show-remove .remove-btn {
     opacity: 1;
   }
 }
