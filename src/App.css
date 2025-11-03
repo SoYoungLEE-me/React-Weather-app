@@ -232,8 +232,18 @@
   justify-content: center;
 }
 
-.city-btn-wrapper:hover .remove-btn {
-  opacity: 1;
+/* PC 전용 hover 효과 */
+@media (hover: hover) and (pointer: fine) {
+  .city-btn-wrapper:hover .remove-btn {
+    opacity: 1;
+  }
+}
+
+/* 모바일 전용: 터치 시 fade-in */
+@media (hover: none) and (pointer: coarse) {
+  .remove-btn {
+    opacity: 1;
+  }
 }
 
 /*로딩 스피너 css*/

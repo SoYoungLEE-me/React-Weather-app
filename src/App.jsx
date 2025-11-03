@@ -60,6 +60,13 @@ function App() {
     setActiveCity(cityName);
     setLoading(true);
     const data = await citiesWeather(cityName);
+
+    if (data.cod === "404") {
+      alert("도시명을 올바르게 입력해주세요! (예: seoul, tokyo, new york)");
+      setLoading(false);
+      return;
+    }
+
     setWeather(data);
     setLoading(false);
   };
@@ -82,6 +89,7 @@ function App() {
             onCityChange={handleCitySearch}
             onCurrentLocation={getCurrentLocation}
             activeCity={activeCity}
+            onSearch={handleCitySearch}
           />
         )
       )}

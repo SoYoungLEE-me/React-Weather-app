@@ -9,6 +9,7 @@ const WeatherBox = ({
   onCityChange,
   onCurrentLocation,
   activeCity,
+  onSearch,
 }) => {
   const [unit, setUnit] = useState("C");
 
@@ -84,7 +85,7 @@ const WeatherBox = ({
         background: bgColor,
       }}
     >
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
       {/* 섭씨 화씨 변환 토글 */}
       <div className="unit-toggle">
         <button
