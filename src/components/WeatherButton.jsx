@@ -7,20 +7,42 @@ const WeatherButton = ({
   activeCity,
 }) => {
   useEffect(() => {
-    // 모바일 환경에서만 실행
+    // 모바일 환경만 long press 감지
     if (window.matchMedia("(hover: none) and (pointer: coarse)").matches) {
       const wrappers = document.querySelectorAll(".city-btn-wrapper");
 
-      const handleClick = (wrapper) => {
-        wrapper.classList.toggle("show-remove");
-      };
-
       wrappers.forEach((wrapper) => {
-        const listener = () => handleClick(wrapper);
-        wrapper.addEventListener("click", listener);
+        let pressTimer;
 
-        // cleanup (React unmount 시)
-        return () => wrapper.removeEventListener("click", listener);
+        const startPress = () => {
+          pressTimer = setTimeout(() => {
+            wrapper.classList.add("show-remove");
+          }, 600); // 0.6초 이상 누르면 show-remove
+        };
+
+        const cancelPress = () => {
+          clearTimeout(pressTimer);
+        };
+
+        const closeAll = (e) => {
+          // remove 버튼이 아닌 곳 누르면 닫기
+          if (!e.target.classList.contains("remove-btn")) {
+            wrapper.classList.remove("show-remove");
+          }
+        };
+
+        wrapper.addEventListener("touchstart", startPress);
+        wrapper.addEventListener("touchend", cancelPress);
+        wrapper.addEventListener("touchmove", cancelPress);
+        document.addEventListener("touchstart", closeAll);
+
+        // cleanup
+        return () => {
+          wrapper.removeEventListener("touchstart", startPress);
+          wrapper.removeEventListener("touchend", cancelPress);
+          wrapper.removeEventListener("touchmove", cancelPress);
+          document.removeEventListener("touchstart", closeAll);
+        };
       });
     }
   }, []);
