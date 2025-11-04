@@ -3,6 +3,7 @@ import { citiesWeather, getCurrentWeather } from "./api/weather";
 import WeatherBox from "./components/WeatherBox";
 import LocationErrorModal from "./components/LocationErrorModal";
 import { ClipLoader } from "react-spinners";
+import useCityStore from "./stores/useCityStore";
 import "./App.css";
 
 //1. 앱이 실행되자마자 현재위치기반의 날씨가 보인다.
@@ -16,7 +17,7 @@ function App() {
   const [activeCity, setActiveCity] = useState("current");
   const [locationError, setLocationError] = useState(false);
 
-  const cities = ["paris", "new york", "tokyo", "seoul", "busan"];
+  const { cities, addCity, removeCity } = useCityStore();
 
   const getCurrentLocation = () => {
     setActiveCity("current");
@@ -75,6 +76,16 @@ function App() {
     getCurrentLocation();
   }, []);
 
+  const handleAddCity = () => {
+    const cityName = weather?.name?.toLowerCase();
+    if (!cityName) return;
+    addCity(cityName);
+  };
+
+  const handleRemoveCity = (cityName) => {
+    removeCity(cityName);
+  };
+
   return (
     <div className="app-container">
       {loading ? (
@@ -90,6 +101,8 @@ function App() {
             onCurrentLocation={getCurrentLocation}
             activeCity={activeCity}
             onSearch={handleCitySearch}
+            onAddCity={handleAddCity}
+            onRemoveCity={handleRemoveCity}
           />
         )
       )}

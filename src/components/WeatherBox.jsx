@@ -10,6 +10,8 @@ const WeatherBox = ({
   onCurrentLocation,
   activeCity,
   onSearch,
+  onAddCity,
+  onRemoveCity,
 }) => {
   const [unit, setUnit] = useState("C");
 
@@ -146,6 +148,8 @@ const WeatherBox = ({
         onCityChange={onCityChange}
         onCurrentLocation={onCurrentLocation}
         activeCity={activeCity}
+        onAddCity={onAddCity}
+        onRemoveCity={onRemoveCity}
       />
     </div>
   );
